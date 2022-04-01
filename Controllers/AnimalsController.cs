@@ -19,13 +19,36 @@ namespace AnimalShelter.Solution.Controllers
     {
       _db = db;
     }
-
+    /// <summary>
+    /// Gets all animals currently in the shelter.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     GET /Animals
+    ///     {
+    ///     }
+    ///
+    /// </remarks>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Animal>>> Get()
     {
       return await _db.Animals.ToListAsync();
     }
-
+    /// <summary>
+    /// Gets animal by Id.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     GET /Animals
+    ///     {
+    ///        AnimalId: 3
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="id">Id of the animal</param>
+    /// <response code="404">No animals with this Id exist</response>
     [HttpGet("{id}")]
     public async Task<ActionResult<Animal>> GetAnimalById(int id)
     {
@@ -38,7 +61,28 @@ namespace AnimalShelter.Solution.Controllers
 
       return animal;
     }
-
+    /// <summary>
+    /// Creates a new animal.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /Animals
+    ///     {
+    ///        "name": "Buddy",
+    ///        "species": "Dog",
+    ///        "breed": "Australian Shepard",
+    ///        "gender": "Male",
+    ///        "age": 0,
+    ///        "adoptionPrice": 800,
+    ///        "goodWithOtherAnimals": true,
+    ///        "goodWithChildren": true,
+    ///        "dateListed": (2022, 3, 2)
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="animal">Animal Object</param>
+    /// <response code="404">No animals with this Id exist</response>
     [HttpPost]
     public async Task<ActionResult<Animal>> Post(Animal animal)
     {

@@ -40,7 +40,7 @@ namespace AnimalShelter.Solution
         {
           Title = "Animal Shelter API",
           Version = "v1",
-          Description = "n ASP.NET Core Web API for managing an Animal Shelter",
+          Description = "An ASP.NET Core Web API for managing an Animal Shelter",
           Contact = new OpenApiContact
           {
             Name = "Daniel Lindsey",

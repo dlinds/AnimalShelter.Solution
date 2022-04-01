@@ -9,6 +9,7 @@ using AnimalShelter.Models;
 
 namespace AnimalShelter.Solution.Controllers
 {
+  [Produces("application/json")]
   [Route("api/[controller]")]
   [ApiController]
   public class AnimalsController : ControllerBase
@@ -92,6 +93,30 @@ namespace AnimalShelter.Solution.Controllers
       return CreatedAtAction(nameof(GetAnimalById), new { id = animal.AnimalId }, animal);
     }
 
+    /// <summary>
+    /// Edits an existing animal.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     PUT /Animals
+    ///     {
+    ///        "AnimalId": 4
+    ///        "name": "Buddy",
+    ///        "species": "Dog",
+    ///        "breed": "Australian Shepard",
+    ///        "gender": "Male",
+    ///        "age": 0,
+    ///        "adoptionPrice": 800,
+    ///        "goodWithOtherAnimals": true,
+    ///        "goodWithChildren": true,
+    ///        "dateListed": (2022, 3, 2)
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="animal">Animal Object</param>
+    /// <param name="id">Id of the animal</param>
+    /// <response code="404">No animals with this Id exist</response>
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Animal animal)
     {
@@ -118,7 +143,20 @@ namespace AnimalShelter.Solution.Controllers
       }
       return NoContent();
     }
-
+    /// <summary>
+    /// Deletes animal by Id.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     DELETE /Animals
+    ///     {
+    ///        AnimalId: 3
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="id">Id of the animal</param>
+    /// <response code="404">No animals with this Id exist</response>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAnimal(int id)
     {

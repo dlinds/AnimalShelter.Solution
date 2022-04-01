@@ -32,10 +32,13 @@ namespace AnimalShelter.Solution.Controllers
     ///
     /// </remarks>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Animal>>> Get()
+    public async Task<ActionResult<IEnumerable<Animal>>> Get(string gender, string species)
     {
       return await _db.Animals.ToListAsync();
     }
+
+
+
     /// <summary>
     /// Gets animal by Id.
     /// </summary>

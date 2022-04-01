@@ -135,6 +135,37 @@ namespace AnimalShelter.Solution.Controllers
 
       return animal;
     }
+
+
+    /// <summary>
+    /// Gets all current breeds.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     GET /Animals/breeds
+    ///     {
+    ///     }
+    ///
+    /// </remarks>
+    /// <response code="404">No animals currently exist, so there are no breeds</response>
+    [HttpGet("breeds")]
+    public async Task<ActionResult<IEnumerable<string>>> GetBreeds()
+    {
+      var query = _db.Animals.AsQueryable();
+      var uniqueBreeds = query.Select(p => p.Breed)
+                                  .Distinct().ToListAsync();
+
+
+      // query = query.Select(animal => animal.Breed);
+
+      return await uniqueBreeds;
+
+    }
+
+
+
+
     /// <summary>
     /// Creates a new animal.
     /// </summary>

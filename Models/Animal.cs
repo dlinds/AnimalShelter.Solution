@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System;
 namespace AnimalShelter.Models
 {
   public class Animal
@@ -20,6 +21,8 @@ namespace AnimalShelter.Models
     public bool GoodWithOtherAnimals { get; set; }
     [Required]
     public bool GoodWithChildren { get; set; }
+    [Required]
+    public DateTime DateListed { get; set; }
 
   }
 }

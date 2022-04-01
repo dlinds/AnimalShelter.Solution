@@ -31,10 +31,80 @@ namespace AnimalShelter.Solution.Controllers
     ///     }
     ///
     /// </remarks>
+    /// <param name="gender">Gender of animal</param>
+    /// <param name="species">Animal species (dog or cat)</param>
+    /// <param name="breed">Species breed (Beagle, Calico)</param>
+    /// <param name="age">Animal age</param>
+    /// <param name="ageSearchType">Find older or younger than age param</param>
+    /// <param name="adoptionBudget">Find animals less than price</param>
+    /// <param name="goodWithOtherAnimals">Find animals less than price</param>
+    /// <param name="goodWithChildren">Find animals less than price</param>
+    /// <param name="sort">New or old</param>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Animal>>> Get(string gender, string species)
+    public async Task<ActionResult<IEnumerable<Animal>>> Get(string gender, string species, string breed, int age, string ageSearchType, int adoptionBudget, string goodWithOtherAnimals, string goodWithChildren, string sort)
     {
-      return await _db.Animals.ToListAsync();
+      var query = _db.Animals.AsQueryable();
+
+
+      if (gender != null)
+      {
+        query = query.OrderBy(animal => animal.DateListed).Where(animal => animal.Gender == gender);
+      }
+      if (species != null)
+      {
+        query = query.OrderBy(animal => animal.DateListed).Where(animal => animal.Species == species);
+      }
+      if (breed != null)
+      {
+        query = query.OrderBy(animal => animal.Breed).Where(animal => animal.Breed == breed);
+      }
+      if (age > 0)
+      {
+        if (ageSearchType == "older")
+        {
+          query = query.OrderBy(animal => animal.Breed).Where(animal => animal.Age > age);
+        }
+        else if (ageSearchType == "younger")
+        {
+          query = query.OrderBy(animal => animal.Breed).Where(animal => animal.Age < age);
+        }
+        else
+        {
+          query = query.OrderBy(animal => animal.Breed).Where(animal => animal.Age == age);
+        }
+      }
+      if (adoptionBudget > 0)
+      {
+        query = query.OrderBy(animal => animal.Breed).Where(animal => animal.AdoptionPrice < adoptionBudget);
+      }
+      if (goodWithOtherAnimals == "true")
+      {
+        query = query.OrderBy(animal => animal.Breed).Where(animal => animal.GoodWithOtherAnimals == true);
+      }
+      else if (goodWithOtherAnimals == "false")
+      {
+        query = query.OrderBy(animal => animal.Breed).Where(animal => animal.GoodWithOtherAnimals == false);
+      }
+      if (goodWithChildren == "true")
+      {
+        query = query.OrderBy(animal => animal.Breed).Where(animal => animal.GoodWithChildren == true);
+      }
+      else if (goodWithChildren == "false")
+      {
+        query = query.OrderBy(animal => animal.Breed).Where(animal => animal.GoodWithChildren == false);
+      }
+
+
+
+      if (sort == "new")
+      {
+        query = query.OrderByDescending(animal => animal.DateListed);
+      }
+      else
+      {
+        query = query.OrderBy(animal => animal.DateListed);
+      }
+      return await query.ToListAsync();
     }
 
 
@@ -81,7 +151,7 @@ namespace AnimalShelter.Solution.Controllers
     ///        "adoptionPrice": 800,
     ///        "goodWithOtherAnimals": true,
     ///        "goodWithChildren": true,
-    ///        "dateListed": (2022, 3, 2)
+    ///        "dateListed": "2022-01-15T00:00:00"
     ///     }
     ///
     /// </remarks>

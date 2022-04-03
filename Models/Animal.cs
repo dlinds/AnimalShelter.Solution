@@ -23,6 +23,7 @@ namespace AnimalShelter.Models
     public bool GoodWithChildren { get; set; }
     [Required]
     public DateTime DateListed { get; set; }
+    [Required]
     public string AnimalPhotoURL { get; set; }
 
   }

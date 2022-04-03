@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelter.Solution.Migrations
 {
     [DbContext(typeof(AnimalShelterContext))]
-    [Migration("20220401220239_AddAnimalPhotoURL")]
-    partial class AddAnimalPhotoURL
+    [Migration("20220403204423_RequirePhotoURL")]
+    partial class RequirePhotoURL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,7 @@ namespace AnimalShelter.Solution.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AnimalPhotoURL")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Breed")
@@ -69,6 +70,7 @@ namespace AnimalShelter.Solution.Migrations
                             AnimalId = 1,
                             AdoptionPrice = 500,
                             Age = 6,
+                            AnimalPhotoURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsuPg3g3nAvGkX3pJKCxVT92YlipcQW87tMQ&usqp=CAU",
                             Breed = "Beagle",
                             DateListed = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Gender = "Female",
@@ -82,6 +84,7 @@ namespace AnimalShelter.Solution.Migrations
                             AnimalId = 2,
                             AdoptionPrice = 800,
                             Age = 1,
+                            AnimalPhotoURL = "https://dogsbestlife.com/wp-content/uploads/2020/05/Beagle-scaled.jpeg",
                             Breed = "Beagle",
                             DateListed = new DateTime(2022, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Gender = "Male",
@@ -95,6 +98,7 @@ namespace AnimalShelter.Solution.Migrations
                             AnimalId = 3,
                             AdoptionPrice = 200,
                             Age = 9,
+                            AnimalPhotoURL = "https://www.akc.org/wp-content/uploads/2017/11/Standard-Schnauzer-standing-outdoors.jpg",
                             Breed = "German Schnauzer",
                             DateListed = new DateTime(2021, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Gender = "Male",
@@ -108,6 +112,7 @@ namespace AnimalShelter.Solution.Migrations
                             AnimalId = 4,
                             AdoptionPrice = 100,
                             Age = 2,
+                            AnimalPhotoURL = "https://images.ctfassets.net/sfnkq8lmu5d7/1j5LJ5cIY1gfqE90AxvD6V/11c51d0709478c75d9a6716d92b28c08/2021_0714_national_mutt_day.jpg?w=1000&h=750&fl=progressive&q=80&fm=jpg",
                             Breed = "Mutt",
                             DateListed = new DateTime(2021, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Gender = "Female",
@@ -121,6 +126,7 @@ namespace AnimalShelter.Solution.Migrations
                             AnimalId = 5,
                             AdoptionPrice = 800,
                             Age = 0,
+                            AnimalPhotoURL = "https://highlandcanine.com/wp-content/uploads/2021/03/pomeranian-running-and-happy.jpg",
                             Breed = "Pomeranian",
                             DateListed = new DateTime(2022, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Gender = "Female",
@@ -134,6 +140,7 @@ namespace AnimalShelter.Solution.Migrations
                             AnimalId = 6,
                             AdoptionPrice = 70,
                             Age = 15,
+                            AnimalPhotoURL = "https://s36537.pcdn.co/wp-content/uploads/2017/11/Mackerel-Tabby-cat.jpg.optimal.jpg",
                             Breed = "Tabby",
                             DateListed = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Gender = "Male",
@@ -147,6 +154,7 @@ namespace AnimalShelter.Solution.Migrations
                             AnimalId = 7,
                             AdoptionPrice = 300,
                             Age = 0,
+                            AnimalPhotoURL = "https://cat-world.com/wp-content/uploads/2016/09/all-about-calico-cats.jpg",
                             Breed = "Calico",
                             DateListed = new DateTime(2022, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Gender = "Female",

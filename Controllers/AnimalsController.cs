@@ -164,6 +164,31 @@ namespace AnimalShelter.Solution.Controllers
     }
 
 
+    /// <summary>
+    /// Gets all current species.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     GET /Animals/species
+    ///     {
+    ///     }
+    ///
+    /// </remarks>
+    /// <response code="404">No animals currently exist, so there are no breeds</response>
+    [HttpGet("species")]
+    public async Task<ActionResult<IEnumerable<string>>> GetSpecies()
+    {
+      var query = _db.Animals.AsQueryable();
+      var uniqueSpecies = query.Select(p => p.Species)
+                                  .Distinct().ToListAsync();
+
+
+      // query = query.Select(animal => animal.Breed);
+
+      return await uniqueSpecies;
+
+    }
 
 
     /// <summary>
@@ -182,7 +207,8 @@ namespace AnimalShelter.Solution.Controllers
     ///        "adoptionPrice": 800,
     ///        "goodWithOtherAnimals": true,
     ///        "goodWithChildren": true,
-    ///        "dateListed": "2022-01-15T00:00:00"
+    ///        "dateListed": "2022-01-15T00:00:00",
+    ///        "animalPhotoURL": "https://www.akc.org/wp-content/uploads/2017/01/australian-shepherd-puppy.jpeg"
     ///     }
     ///
     /// </remarks>
@@ -194,7 +220,7 @@ namespace AnimalShelter.Solution.Controllers
       _db.Animals.Add(animal);
       await _db.SaveChangesAsync();
 
-      return CreatedAtAction(nameof(GetAnimalById), new { id = animal.AnimalId }, animal);
+      return CreatedAtAction("Post", new { id = animal.AnimalId }, animal);
     }
 
     /// <summary>
@@ -214,7 +240,8 @@ namespace AnimalShelter.Solution.Controllers
     ///        "adoptionPrice": 800,
     ///        "goodWithOtherAnimals": true,
     ///        "goodWithChildren": true,
-    ///        "dateListed": (2022, 3, 2)
+    ///        "dateListed": (2022, 3, 2),
+    ///        "animalPhotoURL": "https/puppypictures.com/picture.jpg"
     ///     }
     ///
     /// </remarks>

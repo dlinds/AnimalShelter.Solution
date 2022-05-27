@@ -19,9 +19,11 @@
 
 ## Description
 
-This is a C# API application for an animal shelter. This application serves as the API portion of the application, serving data only via API requests. A separate application has been built for the front end, and can be found [here](https://github.com/dlinds/AnimalShelterClient.Solution).
+This is a C# API application for an animal shelter build during a solo Friday project during my time at Epicodus. This repository serves as the API portion of the application, serving data only via API requests. A separate application has been built for the front end, and can be found [here](https://github.com/dlinds/AnimalShelterClient.Solution).
 
 <br>
+
+You can view the Swagger documentation and endpoints for this API here: [http://animalshelterapi.dlinds.com:6003/swagger/index.html](http://animalshelterapi.dlinds.com:6003/swagger/index.html). If you would like to view the front end application that calls the API animals endpoint, please navigate to [http://animalshelter.dlinds.com:6003](http://animalshelter.dlinds.com:6003).
 
 # Setup/Installation Requirements
 
